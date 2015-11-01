@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 using System.Data.SqlClient;
+using CommandLine.Text;
 using Org.DeployTools.Shared;
 
 namespace Org.DeployTools.DacpacDbCompare
@@ -11,13 +12,21 @@ namespace Org.DeployTools.DacpacDbCompare
         {
             try
             {
+                var options = new Options();
+                if (!CommandLine.Parser.Default.ParseArguments(args, options))
+                {
+                    Console.Error.WriteLine("Invalid arguments");
+                    Console.Error.WriteLine(HelpText.AutoBuild(options, current => HelpText.DefaultParsingErrorsHandler(options, current)));
+                    Environment.Exit(2);
+                }
+
                 var connectionStringBuilder = new SqlConnectionStringBuilder
                 {
-                    DataSource = args[0],
-                    InitialCatalog = args[1],
+                    DataSource = options.Server,
+                    InitialCatalog = options.Database,
                     IntegratedSecurity = true
                 };
-                CreateScript(DefaultSettings.SqlPackagePath, connectionStringBuilder, args[2], args[3], args[4]);
+                CreateScript(DefaultSettings.SqlPackagePath, connectionStringBuilder, options.DacpacFile, options.ProfileFile, options.OutputFile);
             }
             catch (Exception ex)
             {
