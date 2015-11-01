@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.Common;
-using CommandLine.Text;
+﻿using System.Data.Common;
 using Org.DeployTools.Shared;
 
 namespace Org.DeployTools.DacpacDbCompare
@@ -9,24 +7,7 @@ namespace Org.DeployTools.DacpacDbCompare
     {
         static void Main(string[] args)
         {
-            try
-            {
-                var options = new Options();
-                if (!CommandLine.Parser.Default.ParseArguments(args, options))
-                {
-                    Console.Error.WriteLine("Invalid arguments");
-                    Console.Error.WriteLine(HelpText.AutoBuild(options, current => HelpText.DefaultParsingErrorsHandler(options, current)));
-                    Environment.Exit(2);
-                }
-
-                CreateScript(options);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-                Console.Error.WriteLine(ex.StackTrace);
-                Environment.Exit(1);
-            }
+            SafeMain.ParseArgumentsAndRunInTryCatch<Options>(args, CreateScript);
         }
 
         private static void CreateScript(Options options)
