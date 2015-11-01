@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.DeployTools.Shared", "Org.DeployTools.Shared\Org.DeployTools.Shared.csproj", "{F715F822-BC20-4D82-9BC3-6C92FA41EBF4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9374F6C4-67EA-44C1-AB78-BA65F1719B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.DeployTools.DacpacDbCompare", "Database\Org.DeployTools.DacpacDbCompare\Org.DeployTools.DacpacDbCompare.csproj", "{547F19C4-E9FC-4ABA-A881-5A1D6FED9551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,15 @@ Global
 		{F715F822-BC20-4D82-9BC3-6C92FA41EBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F715F822-BC20-4D82-9BC3-6C92FA41EBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F715F822-BC20-4D82-9BC3-6C92FA41EBF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{547F19C4-E9FC-4ABA-A881-5A1D6FED9551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{547F19C4-E9FC-4ABA-A881-5A1D6FED9551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{547F19C4-E9FC-4ABA-A881-5A1D6FED9551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{547F19C4-E9FC-4ABA-A881-5A1D6FED9551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{547F19C4-E9FC-4ABA-A881-5A1D6FED9551} = {9374F6C4-67EA-44C1-AB78-BA65F1719B0F}
 	EndGlobalSection
 EndGlobal
