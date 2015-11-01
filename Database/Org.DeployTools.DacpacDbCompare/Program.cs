@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Common;
-using System.Data.SqlClient;
 using CommandLine.Text;
 using Org.DeployTools.Shared;
 
@@ -20,13 +19,7 @@ namespace Org.DeployTools.DacpacDbCompare
                     Environment.Exit(2);
                 }
 
-                var connectionStringBuilder = new SqlConnectionStringBuilder
-                {
-                    DataSource = options.Server,
-                    InitialCatalog = options.Database,
-                    IntegratedSecurity = true
-                };
-                CreateScript(DefaultSettings.SqlPackagePath, connectionStringBuilder, options.DacpacFile, options.ProfileFile, options.OutputFile);
+                CreateScript(options);
             }
             catch (Exception ex)
             {
@@ -34,6 +27,13 @@ namespace Org.DeployTools.DacpacDbCompare
                 Console.Error.WriteLine(ex.StackTrace);
                 Environment.Exit(1);
             }
+        }
+
+        private static void CreateScript(Options options)
+        {
+            var connectionStringBuilder = options.ConnectionStringBuilder();
+            CreateScript(DefaultSettings.SqlPackagePath, connectionStringBuilder, options.DacpacFile, options.ProfileFile,
+                options.OutputFile);
         }
 
         private static void CreateScript(string sqlpackage, DbConnectionStringBuilder connection, string dacpacFile, string profileFile, string outputFile)

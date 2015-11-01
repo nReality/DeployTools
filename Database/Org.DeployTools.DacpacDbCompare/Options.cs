@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿using System.Data.SqlClient;
+using CommandLine;
 
 namespace Org.DeployTools.DacpacDbCompare
 {
@@ -16,5 +17,15 @@ namespace Org.DeployTools.DacpacDbCompare
 
         [Option("output", HelpText = "Output script file", Required = true)]
         public string OutputFile { get; set; }
+
+        public SqlConnectionStringBuilder ConnectionStringBuilder()
+        {
+            return new SqlConnectionStringBuilder
+            {
+                DataSource = Server,
+                InitialCatalog = Database,
+                IntegratedSecurity = true
+            };
+        }
     }
 }
