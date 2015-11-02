@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
 using Org.DeployTools.Shared;
+using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.SqlcmdScriptRunner
 {
@@ -13,7 +16,17 @@ namespace Org.DeployTools.SqlcmdScriptRunner
 
         private static void Run(Options options)
         {
-            foreach (var file in options.Files)
+            foreach (var scriptFileMask in options.FileMasks)
+            {
+                RunScriptsForMask(options, scriptFileMask);
+            }
+        }
+
+        private static void RunScriptsForMask(ConnectionStringOptions options, string scriptFileMask)
+        {
+            var filesForArgPattern = Directory.GetFiles(Directory.GetCurrentDirectory(), scriptFileMask).ToList();
+            Console.WriteLine("{0} files match pattern {1}", filesForArgPattern.Count, scriptFileMask);
+            foreach (var file in filesForArgPattern)
             {
                 DeployScript(DefaultSettings.SqlcmdPath, options.ConnectionStringBuilder(), file);
             }

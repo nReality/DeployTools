@@ -7,6 +7,6 @@ namespace Org.DeployTools.SqlcmdScriptRunner
     class Options : ConnectionStringOptions
     {
         [ValueList(typeof(List<string>))]
-        public List<string> Files { get; set; }
+        public List<string> FileMasks { get; set; }
     }
 }
