@@ -34,7 +34,8 @@ namespace Org.DeployTools.AzureMsdeploy
 
         private static string GetFullPathToPackageDir(string packageDir)
         {
-            return Path.Combine(Directory.GetCurrentDirectory(), packageDir);
+            var isPathRooted = Path.IsPathRooted(packageDir);
+            return isPathRooted ? packageDir : Path.Combine(Directory.GetCurrentDirectory(), packageDir);
         }
     }
 }
