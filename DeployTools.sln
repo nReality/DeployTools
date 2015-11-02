@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.DeployTools.DacpacDbCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.DeployTools.SqlcmdScriptRunner", "Database\Org.DeployTools.SqlcmdScriptRunner\Org.DeployTools.SqlcmdScriptRunner.csproj", "{C6F326A5-1914-4ABF-A502-85582964A18A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.DeployTools.AzureMsdeploy", "Org.DeployTools.AzureMsdeploy\Org.DeployTools.AzureMsdeploy.csproj", "{87C98553-DC00-482B-8A5F-3BB31A577011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C6F326A5-1914-4ABF-A502-85582964A18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6F326A5-1914-4ABF-A502-85582964A18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6F326A5-1914-4ABF-A502-85582964A18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87C98553-DC00-482B-8A5F-3BB31A577011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C98553-DC00-482B-8A5F-3BB31A577011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C98553-DC00-482B-8A5F-3BB31A577011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87C98553-DC00-482B-8A5F-3BB31A577011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
