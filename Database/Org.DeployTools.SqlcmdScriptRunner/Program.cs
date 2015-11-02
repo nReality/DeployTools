@@ -24,8 +24,14 @@ namespace Org.DeployTools.SqlcmdScriptRunner
 
         private static void RunScriptsForMask(ConnectionStringOptions options, string scriptFileMask)
         {
-            var filesForArgPattern = Directory.GetFiles(Directory.GetCurrentDirectory(), scriptFileMask).ToList();
-            Console.WriteLine("{0} files match pattern {1}", filesForArgPattern.Count, scriptFileMask);
+            var directory = Directory.GetCurrentDirectory();
+            if (Path.IsPathRooted(scriptFileMask))
+            {
+                directory = Path.GetDirectoryName(scriptFileMask) ?? directory;
+                scriptFileMask = Path.GetFileName(scriptFileMask) ?? scriptFileMask;
+            }
+            var filesForArgPattern = Directory.GetFiles(directory, scriptFileMask).ToList();
+            Console.WriteLine("{0} files match pattern {1} (in {2})", filesForArgPattern.Count, scriptFileMask, directory);
             foreach (var file in filesForArgPattern)
             {
                 DeployScript(DefaultSettings.SqlcmdPath, options.ConnectionStringBuilder(), file);
