@@ -30,7 +30,10 @@ namespace Org.DeployTools.AzureMsdeploy
         public void Setup()
         {
             if (PackageDir == null)
-                PackageDir = Path.Combine(ProjectDir, DefaultSettings.PackageDirectoryInProjectDir);
+                PackageDir = Path.Combine(Directory.GetCurrentDirectory(), ProjectDir,
+                    DefaultSettings.PackageDirectoryInProjectDir);
+            else
+                PackageDir = Path.Combine(Directory.GetCurrentDirectory(), PackageDir);
         }
     }
 }
