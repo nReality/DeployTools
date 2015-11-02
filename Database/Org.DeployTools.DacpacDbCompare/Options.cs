@@ -12,5 +12,13 @@ namespace Org.DeployTools.DacpacDbCompare
 
         [Option("output", HelpText = "Output script file", Required = true)]
         public string OutputFile { get; set; }
+
+        public void GuardArgumentsValid()
+        {
+        }
+
+        public void Setup()
+        {
+        }
     }
 }

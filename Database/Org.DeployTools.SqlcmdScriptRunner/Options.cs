@@ -8,5 +8,13 @@ namespace Org.DeployTools.SqlcmdScriptRunner
     {
         [ValueList(typeof(List<string>))]
         public List<string> FileMasks { get; set; }
+
+        public void GuardArgumentsValid()
+        {
+        }
+
+        public void Setup()
+        {
+        }
     }
 }

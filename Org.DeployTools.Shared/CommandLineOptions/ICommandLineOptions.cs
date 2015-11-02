@@ -2,5 +2,7 @@
 {
     public interface ICommandLineOptions
     {
+        void GuardArgumentsValid();
+        void Setup();
     }
 }

@@ -13,5 +13,13 @@ namespace Org.DeployTools.AzureMsdeploy
         public string Sitename { get; set; }
         [Option("project-dir", HelpText = "Local path to deploy from", Required = true)]
         public string ProjectDir { get; set; }
+
+        public void GuardArgumentsValid()
+        {
+        }
+
+        public void Setup()
+        {
+        }
     }
 }

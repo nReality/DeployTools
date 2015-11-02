@@ -29,6 +29,8 @@ namespace Org.DeployTools.Shared
                 var options = new TArgumentType();
                 if (CommandLine.Parser.Default.ParseArguments(args, options))
                 {
+                    options.GuardArgumentsValid();
+                    options.Setup();
                     run(options);
                 }
                 else
