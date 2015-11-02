@@ -1,8 +1,9 @@
 ﻿using CommandLine;
+using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.AzureMsdeploy
 {
-    class Options
+    class Options : ICommandLineOptions
     {
         [Option("username", HelpText = "Username for authentication", Required = true)]
         public string Username { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using CommandLine.Text;
+using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.Shared
 {
@@ -21,7 +22,7 @@ namespace Org.DeployTools.Shared
         }
 
         public static void ParseArgumentsAndRunInTryCatch<TArgumentType>(string[] args, Action<TArgumentType> run)
-            where TArgumentType : new()
+            where TArgumentType : ICommandLineOptions, new()
         {
             RunInTryCatch(() =>
             {
