@@ -11,6 +11,9 @@ namespace Org.DeployTools.Shared.CommandLineOptions
         [Option("database", HelpText = "Database to compare against", Required = true)]
         public string Database { get; set; }
 
+        [Option("integrated", HelpText = "Use integrated security for authentication")]
+        public bool UseIntegratedSecutory { get; set; }
+
         public SqlConnectionStringBuilder ConnectionStringBuilder()
         {
             return IntegratedSecutirySqlConnectionStringBuilder();
