@@ -13,6 +13,11 @@ namespace Org.DeployTools.Shared.CommandLineOptions
 
         public SqlConnectionStringBuilder ConnectionStringBuilder()
         {
+            return IntegratedSecutirySqlConnectionStringBuilder();
+        }
+
+        private SqlConnectionStringBuilder IntegratedSecutirySqlConnectionStringBuilder()
+        {
             return new SqlConnectionStringBuilder
             {
                 DataSource = Server,
