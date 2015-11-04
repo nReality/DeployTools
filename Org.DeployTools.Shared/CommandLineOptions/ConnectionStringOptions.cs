@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using CommandLine;
 
 namespace Org.DeployTools.Shared.CommandLineOptions
@@ -50,6 +51,8 @@ namespace Org.DeployTools.Shared.CommandLineOptions
 
         public virtual void GuardArgumentsValid()
         {
+            if (!UseIntegratedSecutory && (Username == null || Password == null))
+                throw new Exception("Expected sql username and password when using sql authentication");
         }
 
         public virtual void Setup()

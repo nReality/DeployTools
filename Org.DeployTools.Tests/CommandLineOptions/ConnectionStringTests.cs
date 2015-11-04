@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.Tests.CommandLineOptions
@@ -33,6 +34,27 @@ namespace Org.DeployTools.Tests.CommandLineOptions
             Assert.AreEqual(false, builder.IntegratedSecurity);
             Assert.AreEqual("user", builder.UserID);
             Assert.AreEqual("pass", builder.Password);
+        }
+
+        [Test]
+        [TestCase("--username", "user")]
+        [TestCase("--password", "pass")]
+        public void MustHaveUsernameAndPassword(string argumentName, string value)
+        {
+            var args = new[] { "--server", "server", "--database", "database", argumentName, value };
+
+            var options = new ConnectionStringOptions();
+
+            var failed = false;
+            try
+            {
+                ParseArguments(args, options);
+            }
+            catch (Exception)
+            {
+                failed = true;
+            }
+            Assert.IsTrue(failed, "expected parsing to fail");
         }
 
         private static bool ParseArguments(string[] args, ConnectionStringOptions options)
