@@ -4,17 +4,9 @@ using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.SqlcmdScriptRunner
 {
-    class Options : ConnectionStringOptions, ICommandLineOptions
+    class Options : ConnectionStringOptions
     {
         [ValueList(typeof(List<string>))]
         public List<string> FileMasks { get; set; }
-
-        public void GuardArgumentsValid()
-        {
-        }
-
-        public void Setup()
-        {
-        }
     }
 }

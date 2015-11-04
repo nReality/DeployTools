@@ -3,7 +3,7 @@ using CommandLine;
 
 namespace Org.DeployTools.Shared.CommandLineOptions
 {
-    public class ConnectionStringOptions
+    public class ConnectionStringOptions : ICommandLineOptions
     {
         [Option("server", HelpText = "Server to compare against", Required = true)]
         public string Server { get; set; }
@@ -46,6 +46,14 @@ namespace Org.DeployTools.Shared.CommandLineOptions
                 InitialCatalog = Database,
                 IntegratedSecurity = true
             };
+        }
+
+        public virtual void GuardArgumentsValid()
+        {
+        }
+
+        public virtual void Setup()
+        {
         }
     }
 }

@@ -3,7 +3,7 @@ using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.DacpacDbCompare
 {
-    class Options : ConnectionStringOptions, ICommandLineOptions
+    class Options : ConnectionStringOptions
     {
         [Option("dacpac", HelpText = "Dacpac file to use as input", Required = true)]
         public string DacpacFile { get; set; }
@@ -12,13 +12,5 @@ namespace Org.DeployTools.DacpacDbCompare
 
         [Option("output", HelpText = "Output script file", Required = true)]
         public string OutputFile { get; set; }
-
-        public void GuardArgumentsValid()
-        {
-        }
-
-        public void Setup()
-        {
-        }
     }
 }
