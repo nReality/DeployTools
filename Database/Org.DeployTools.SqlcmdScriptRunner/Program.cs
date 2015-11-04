@@ -30,7 +30,7 @@ namespace Org.DeployTools.SqlcmdScriptRunner
                 directory = Path.GetDirectoryName(scriptFileMask) ?? directory;
                 scriptFileMask = Path.GetFileName(scriptFileMask) ?? scriptFileMask;
             }
-            var filesForArgPattern = Directory.GetFiles(directory, scriptFileMask).ToList();
+            var filesForArgPattern = Directory.GetFiles(directory, scriptFileMask).OrderBy(s => s).ToList();
             Console.WriteLine("{0} files match pattern {1} (in {2})", filesForArgPattern.Count, scriptFileMask, directory);
             foreach (var file in filesForArgPattern)
             {
