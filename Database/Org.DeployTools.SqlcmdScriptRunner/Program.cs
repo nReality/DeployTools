@@ -48,7 +48,12 @@ namespace Org.DeployTools.SqlcmdScriptRunner
         private static string GetSqlcmdCommandLineArguments(SqlConnectionStringBuilder connection, string scriptFile)
         {
             const string argumentsMaskIntegrated = "-S \"{0}\" -d {1} -i \"{2}\"";
-            var arguments = string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile);
+            const string argumentsMaskSqlUser = "-S \"{0}\" -d {1} -U {2} -P \"{3}\" -N -b -i \"{4}\"";
+            var arguments =
+                connection.IntegratedSecurity
+                    ? string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile)
+                    : string.Format(argumentsMaskSqlUser, connection.DataSource, connection.InitialCatalog,
+                        connection.UserID, connection.Password, scriptFile);
             return arguments;
         }
     }
