@@ -21,6 +21,9 @@ namespace Org.DeployTools.Shared.CommandLineOptions
         [Option("password", HelpText = "Password to use with authentication")]
         public string Password { get; set; }
 
+        [Option("trust-server-certificate", HelpText = "Trust the server certificate. ('SSL Provider: The certificate chain was issued by an authority that is not trusted.')")]
+        public bool TrustServerCertificate { get; set; }
+
         public SqlConnectionStringBuilder ConnectionStringBuilder()
         {
             return UseIntegratedSecutory
@@ -35,7 +38,8 @@ namespace Org.DeployTools.Shared.CommandLineOptions
                 DataSource = Server,
                 InitialCatalog = Database,
                 UserID = Username,
-                Password = Password
+                Password = Password,
+                TrustServerCertificate = TrustServerCertificate
             };
         }
 
@@ -45,7 +49,8 @@ namespace Org.DeployTools.Shared.CommandLineOptions
             {
                 DataSource = Server,
                 InitialCatalog = Database,
-                IntegratedSecurity = true
+                IntegratedSecurity = true,
+                TrustServerCertificate = TrustServerCertificate
             };
         }
 
