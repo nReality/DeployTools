@@ -40,10 +40,16 @@ namespace Org.DeployTools.SqlcmdScriptRunner
 
         private static void DeployScript(string sqlcmd, SqlConnectionStringBuilder connection, string scriptFile)
         {
-            const string argumentsMaskIntegrated = "-S \"{0}\" -d {1} -i \"{2}\"";
-            var arguments = string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile);
+            var arguments = GetSqlcmdCommandLineArguments(connection, scriptFile);
             Console.WriteLine("Executing script {0}", scriptFile);
             ExternalProcessExecutor.Exec(sqlcmd, arguments);
+        }
+
+        private static string GetSqlcmdCommandLineArguments(SqlConnectionStringBuilder connection, string scriptFile)
+        {
+            const string argumentsMaskIntegrated = "-S \"{0}\" -d {1} -i \"{2}\"";
+            var arguments = string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile);
+            return arguments;
         }
     }
 }
