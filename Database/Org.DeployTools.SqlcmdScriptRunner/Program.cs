@@ -54,6 +54,8 @@ namespace Org.DeployTools.SqlcmdScriptRunner
                     ? string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile)
                     : string.Format(argumentsMaskSqlUser, connection.DataSource, connection.InitialCatalog,
                         connection.UserID, connection.Password, scriptFile);
+            if (connection.TrustServerCertificate)
+                arguments += " -C";
             return arguments;
         }
     }
