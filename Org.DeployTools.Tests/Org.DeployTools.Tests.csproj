@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineOptions\ConnectionStringTests.cs" />
+    <Compile Include="ExternalProcessArguments\SqlcmdTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

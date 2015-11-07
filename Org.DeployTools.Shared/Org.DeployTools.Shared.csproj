@@ -41,6 +41,7 @@
     <Compile Include="CommandLineOptions\ConnectionStringOptions.cs" />
     <Compile Include="CommandLineOptions\ICommandLineOptions.cs" />
     <Compile Include="DefaultSettings.cs" />
+    <Compile Include="ExternalProcessArgumentBuilder\SqlcmdArguments.cs" />
     <Compile Include="ExternalProcessExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SafeMain.cs" />
