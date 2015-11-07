@@ -40,6 +40,19 @@ namespace Org.DeployTools.Tests.ExternalProcessArguments
         }
 
         [Test]
+        [TestCase(true, "trust flag missing")]
+        [TestCase(false, "trust flag present")]
+        public void TrustServerCertificate(bool trust, string details)
+        {
+            _sqlConnectionStringBuilder.TrustServerCertificate = trust;
+
+            var builder = SqlcmdArgumentsBuilder.Build(_sqlConnectionStringBuilder);
+            var arguments = builder.AddScript("file").ToString();
+
+            Assert.AreEqual(trust, arguments.Contains("-C"), details + " missing in " + arguments);
+        }
+
+        [Test]
         public void SqlAuthentication()
         {
             _sqlConnectionStringBuilder.IntegratedSecurity = false;

@@ -20,6 +20,8 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
                     ? string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog)
                     : string.Format(argumentsMaskSqlUser, connection.DataSource, connection.InitialCatalog,
                         connection.UserID, connection.Password);
+            if (connection.TrustServerCertificate)
+                arguments += " -C";
             return new SqlcmdArgumentsBuilder(arguments);
         }
 
