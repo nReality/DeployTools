@@ -3,7 +3,6 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using Org.DeployTools.Shared;
-using Org.DeployTools.Shared.CommandLineOptions;
 
 namespace Org.DeployTools.SqlcmdScriptRunner
 {
@@ -22,7 +21,7 @@ namespace Org.DeployTools.SqlcmdScriptRunner
             }
         }
 
-        private static void RunScriptsForMask(ConnectionStringOptions options, string scriptFileMask)
+        private static void RunScriptsForMask(Options options, string scriptFileMask)
         {
             var directory = Directory.GetCurrentDirectory();
             if (Path.IsPathRooted(scriptFileMask))
@@ -34,7 +33,7 @@ namespace Org.DeployTools.SqlcmdScriptRunner
             Console.WriteLine("{0} files match pattern {1} (in {2})", filesForArgPattern.Count, scriptFileMask, directory);
             foreach (var file in filesForArgPattern)
             {
-                DeployScript(DefaultSettings.SqlcmdPath, options.ConnectionStringBuilder(), file);
+                DeployScript(options.SqlcmdPath, options.ConnectionStringBuilder(), file);
             }
         }
 
