@@ -8,7 +8,7 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
 
         private SqlcmdArgumentsBuilder(string connectionArguments)
         {
-            _arguments = connectionArguments;
+            _arguments = connectionArguments + "-b ";
         }
 
         public static SqlcmdArgumentsBuilder Build(SqlConnectionStringBuilder connection)

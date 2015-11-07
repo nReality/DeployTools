@@ -47,9 +47,18 @@ namespace Org.DeployTools.Tests.ExternalProcessArguments
             _sqlConnectionStringBuilder.TrustServerCertificate = trust;
 
             var builder = SqlcmdArgumentsBuilder.Build(_sqlConnectionStringBuilder);
-            var arguments = builder.AddScript("file").ToString();
+            var arguments = builder.ToString();
 
             Assert.AreEqual(trust, arguments.Contains("-C"), details + " missing in " + arguments);
+        }
+
+        [Test]
+        public void BatchAbortOnError()
+        {
+            var builder = SqlcmdArgumentsBuilder.Build(_sqlConnectionStringBuilder);
+            var arguments = builder.ToString();
+
+            Assert.IsTrue(arguments.Contains("-b"), "batch abort flag missing in " + arguments);
         }
 
         [Test]
