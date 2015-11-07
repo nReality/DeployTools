@@ -31,6 +31,15 @@ namespace Org.DeployTools.Tests.ExternalProcessArguments
         }
 
         [Test]
+        public void AddScript()
+        {
+            var builder = SqlcmdArgumentsBuilder.Build(_sqlConnectionStringBuilder);
+            var arguments = builder.AddScript("file").ToString();
+
+            Assert.IsTrue(arguments.Contains("-i \"file\""), "script path missing in " + arguments);
+        }
+
+        [Test]
         public void SqlAuthentication()
         {
             _sqlConnectionStringBuilder.IntegratedSecurity = false;

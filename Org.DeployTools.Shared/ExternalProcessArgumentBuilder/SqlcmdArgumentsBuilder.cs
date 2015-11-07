@@ -4,7 +4,7 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
 {
     public class SqlcmdArgumentsBuilder
     {
-        private readonly string _arguments;
+        private string _arguments;
 
         private SqlcmdArgumentsBuilder(string connectionArguments)
         {
@@ -26,6 +26,12 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
         public override string ToString()
         {
             return _arguments;
+        }
+
+        public SqlcmdArgumentsBuilder AddScript(string file)
+        {
+            _arguments += string.Format("-i \"{0}\" ", file);
+            return this;
         }
     }
 }
