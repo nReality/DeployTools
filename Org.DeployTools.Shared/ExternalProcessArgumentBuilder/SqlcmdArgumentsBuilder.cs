@@ -6,7 +6,7 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
     {
         private const string BatchAbortOnError = "-b ";
         private const string InputScriptFormat = "-i \"{0}\" ";
-        private string _arguments;
+        private readonly string _arguments;
 
         private SqlcmdArgumentsBuilder(string connectionArguments)
         {
@@ -32,10 +32,9 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
             return _arguments;
         }
 
-        public SqlcmdArgumentsBuilder AddScript(string file)
+        public string RunScript(string file)
         {
-            _arguments += string.Format(InputScriptFormat, file);
-            return this;
+            return _arguments + string.Format(InputScriptFormat, file);
         }
     }
 }

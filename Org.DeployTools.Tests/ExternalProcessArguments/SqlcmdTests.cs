@@ -34,7 +34,7 @@ namespace Org.DeployTools.Tests.ExternalProcessArguments
         public void AddScript()
         {
             var builder = SqlcmdArgumentsBuilder.Build(_sqlConnectionStringBuilder);
-            var arguments = builder.AddScript("file").ToString();
+            var arguments = builder.RunScript("file");
 
             Assert.IsTrue(arguments.Contains("-i \"file\""), "script path missing in " + arguments);
         }
