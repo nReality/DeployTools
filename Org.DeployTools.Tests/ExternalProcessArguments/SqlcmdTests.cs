@@ -26,6 +26,20 @@ namespace Org.DeployTools.Tests.ExternalProcessArguments
             var arguments = SqlcmdArguments.Build(_sqlConnectionStringBuilder);
 
             Assert.IsTrue(arguments.Contains("-S \"s\" -d \"d\""), "server and database details missing in " + arguments);
+            Assert.IsFalse(arguments.Contains("-U \"user\" -P \"pass\""), "user and password details present in " + arguments);
+        }
+
+        [Test]
+        public void SqlAuthentication()
+        {
+            _sqlConnectionStringBuilder.IntegratedSecurity = false;
+            _sqlConnectionStringBuilder.UserID = "user";
+            _sqlConnectionStringBuilder.Password = "pass";
+
+            var arguments = SqlcmdArguments.Build(_sqlConnectionStringBuilder);
+
+            Assert.IsTrue(arguments.Contains("-S \"s\" -d \"d\""), "server and database details missing in " + arguments);
+            Assert.IsTrue(arguments.Contains("-U \"user\" -P \"pass\""), "user and password details missing in " + arguments);
         }
     }
 }
