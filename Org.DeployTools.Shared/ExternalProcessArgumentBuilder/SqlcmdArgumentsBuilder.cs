@@ -4,11 +4,13 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
 {
     public class SqlcmdArgumentsBuilder
     {
+        private const string BatchAbortOnError = "-b ";
+        private const string InputScriptFormat = "-i \"{0}\" ";
         private string _arguments;
 
         private SqlcmdArgumentsBuilder(string connectionArguments)
         {
-            _arguments = connectionArguments + "-b ";
+            _arguments = connectionArguments + BatchAbortOnError;
         }
 
         public static SqlcmdArgumentsBuilder Build(SqlConnectionStringBuilder connection)
@@ -32,7 +34,7 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
 
         public SqlcmdArgumentsBuilder AddScript(string file)
         {
-            _arguments += string.Format("-i \"{0}\" ", file);
+            _arguments += string.Format(InputScriptFormat, file);
             return this;
         }
     }
