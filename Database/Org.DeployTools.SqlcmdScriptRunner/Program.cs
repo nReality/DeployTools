@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using Org.DeployTools.Shared;
+using Org.DeployTools.Shared.ExternalProcessArgumentBuilder;
 
 namespace Org.DeployTools.SqlcmdScriptRunner
 {
@@ -39,23 +40,9 @@ namespace Org.DeployTools.SqlcmdScriptRunner
 
         private static void DeployScript(string sqlcmd, SqlConnectionStringBuilder connection, string scriptFile)
         {
-            var arguments = GetSqlcmdCommandLineArguments(connection, scriptFile);
+            var arguments = SqlcmdArgumentsBuilder.Build(connection).RunScript(scriptFile);
             Console.WriteLine("Executing script {0}", scriptFile);
             ExternalProcessExecutor.Exec(sqlcmd, arguments);
-        }
-
-        private static string GetSqlcmdCommandLineArguments(SqlConnectionStringBuilder connection, string scriptFile)
-        {
-            const string argumentsMaskIntegrated = "-S \"{0}\" -d {1} -i \"{2}\"";
-            const string argumentsMaskSqlUser = "-S \"{0}\" -d {1} -U {2} -P \"{3}\" -N -b -i \"{4}\"";
-            var arguments =
-                connection.IntegratedSecurity
-                    ? string.Format(argumentsMaskIntegrated, connection.DataSource, connection.InitialCatalog, scriptFile)
-                    : string.Format(argumentsMaskSqlUser, connection.DataSource, connection.InitialCatalog,
-                        connection.UserID, connection.Password, scriptFile);
-            if (connection.TrustServerCertificate)
-                arguments += " -C";
-            return arguments;
         }
     }
 }
