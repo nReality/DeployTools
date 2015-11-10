@@ -16,7 +16,8 @@ namespace Org.DeployTools.AzureMsdeploy
             const string argumentMask = "-verb:sync -source:contentPath='{0}' -dest:contentPath='{1}',ComputerName='{4}',UserName='{2}',Password='{3}',AuthType='Basic'";
             var deployUrl = string.Format(deployUrlMask, options.Sitename);
             var arguments = string.Format(argumentMask, options.PackageDir, options.Sitename, options.Username, options.Password, deployUrl);
-            Console.WriteLine("deploying to url {0}", deployUrl);
+            Console.WriteLine("deploying to url {0} ({1})", deployUrl, options.Sitename);
+            Console.WriteLine("from {0}", options.PackageDir);
             ExternalProcessExecutor.Exec(DefaultSettings.Msdeploy, arguments);
         }
     }
