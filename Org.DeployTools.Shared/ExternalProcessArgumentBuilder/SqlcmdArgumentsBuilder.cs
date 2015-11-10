@@ -23,7 +23,7 @@ namespace Org.DeployTools.Shared.ExternalProcessArgumentBuilder
                     : string.Format(argumentsMaskSqlUser, connection.DataSource, connection.InitialCatalog,
                         connection.UserID, connection.Password);
             if (connection.TrustServerCertificate)
-                arguments += " -C";
+                arguments += "-C ";
             return new SqlcmdArgumentsBuilder(arguments);
         }
 
