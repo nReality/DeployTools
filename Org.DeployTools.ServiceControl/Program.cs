@@ -36,6 +36,9 @@ namespace Org.DeployTools.ServiceControl
 
         private static string GetExitReason(Options options, int exitCode)
         {
+            if (options.NoSuppressExitCode)
+                return null;
+
             if (exitCode == AlreadyRunningExitCode && options.Action == Options.ScAction.Start)
                 return "Service already running, so start had no effect";
             if (exitCode == NotStartedExitCode && options.Action == Options.ScAction.Stop)

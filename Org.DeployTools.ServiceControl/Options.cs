@@ -8,6 +8,9 @@ namespace Org.DeployTools.ServiceControl
     {
         [Option("servername", HelpText = "Name of the server to connect to", Required = false)]
         public string Servername { get; set; }
+        [Option("no-suppress-some-errors", HelpText = "Do not Suppress some SC errors (for example failing to start because it is already running). Always fail when SC fails", Required = false, DefaultValue = false)]
+        public bool NoSuppressExitCode { get; set; }
+
         [ValueOption(0)]
         public ScAction Action { get; set; }
         [ValueOption(1)]
