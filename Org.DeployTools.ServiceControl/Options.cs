@@ -21,6 +21,7 @@ namespace Org.DeployTools.ServiceControl
             Unknown,
             Stop,
             Start,
+            WaitStop,
         }
 
         public string GetArguments()

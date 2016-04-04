@@ -1,5 +1,6 @@
 ﻿using Org.DeployTools.Shared;
 using System;
+using System.Threading;
 
 namespace Org.DeployTools.ServiceControl
 {
@@ -7,6 +8,7 @@ namespace Org.DeployTools.ServiceControl
     {
         const int AlreadyRunningExitCode = 1056;
         const int NotStartedExitCode = 1062;
+        const int NotAcceptingCommandsExitCode = 1061;
 
         static void Main(string[] args)
         {
@@ -15,8 +17,40 @@ namespace Org.DeployTools.ServiceControl
 
         private static void Run(Options options)
         {
+            if (options.Action == Options.ScAction.WaitStop)
+            {
+                WaitForStop(options);
+            }
+            else
+            {
+                int exitCode = ExternalProcessExecutor.ExecAndGetExitCode(DefaultSettings.ServiceControl, options.GetArguments());
+                ValidateExitCode(options, exitCode);
+            }
+        }
+
+        private static void WaitForStop(Options options)
+        {
             int exitCode = ExternalProcessExecutor.ExecAndGetExitCode(DefaultSettings.ServiceControl, options.GetArguments());
-            ValidateExitCode(options, exitCode);
+            if (exitCode == NotAcceptingCommandsExitCode)
+            {
+                Console.Error.WriteLine("Service is not accepting any commands right now, waiting before trying again");
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+                WaitForStop(options);
+            }
+            else if (exitCode == 0)
+            {
+                Console.Error.WriteLine("Service is stopping, waiting before checking again");
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+                WaitForStop(options);
+            }
+            else if (exitCode == NotStartedExitCode)
+            {
+                Console.WriteLine("Service successfully stopped");
+            }
+            else
+            {
+                ValidateExitCode(options, exitCode);
+            }
         }
 
         private static void ValidateExitCode(Options options, int exitCode)
