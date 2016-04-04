@@ -7,6 +7,12 @@ namespace Org.DeployTools.Shared
     {
         public static void Exec(string path, string arguments)
         {
+            int exitCode = ExecAndGetExitCode(path, arguments);
+            ValidateExitWithZero(exitCode);
+        }
+
+        public static int ExecAndGetExitCode(string path, string arguments)
+        {
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo(path, arguments)
@@ -18,8 +24,13 @@ namespace Org.DeployTools.Shared
             process.Start();
             ReadProcessOutput(process);
             process.WaitForExit();
-            if (process.ExitCode > 0)
-                throw new Exception(string.Format("External process exited with code {0}", process.ExitCode));
+            return process.ExitCode;
+        }
+
+        public static void ValidateExitWithZero(int exitCode)
+        {
+            if (exitCode > 0)
+                throw new Exception(string.Format("External process exited with code {0}", exitCode));
         }
 
         private static void ReadProcessOutput(Process process)
