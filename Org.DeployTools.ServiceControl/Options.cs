@@ -23,6 +23,11 @@ namespace Org.DeployTools.ServiceControl
             Start,
         }
 
+        public string GetArguments()
+        {
+            return string.Format("{0} {1} {2}", Servername, Action.GetServiceAction(), ServiceName);
+        }
+
         public void GuardArgumentsValid()
         {
             if (Action == ScAction.Unknown)

@@ -15,8 +15,7 @@ namespace Org.DeployTools.ServiceControl
 
         private static void Run(Options options)
         {
-            var arguments = string.Format("{0} {1} {2}", options.Servername, options.Action.ToString().ToLower(), options.ServiceName);
-            int exitCode = ExternalProcessExecutor.ExecAndGetExitCode(DefaultSettings.ServiceControl, arguments);
+            int exitCode = ExternalProcessExecutor.ExecAndGetExitCode(DefaultSettings.ServiceControl, options.GetArguments());
             ValidateExitCode(options, exitCode);
         }
 
